@@ -1,0 +1,90 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left">
+                <a href="#/user/{{model.userId}}/website">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right">
+                <a href="#/user/{{model.userId}}/website/new">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/user/{{model.userId}}/website">Websites</a>
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="navbar-text pull-left visible-xs">
+                <a href="#/user/{{model.userId}}/website">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right">
+                <a ng-click="model.newWebsite(website)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/user/{{model.userId}}/website/new">New Website</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="row container-fluid">
+    <div class="col-sm-4 hidden-xs">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Name
+            </div>
+            <ul class="list-group">
+                <li ng-repeat="website in model.websites" class="list-group-item">
+                    <a href="#/user/{{model.userId}}/website/{{website._id}}/page">
+                        {{website.name}}
+                    </a>
+                    <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="pull-right">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+
+        <div ng-show="model.message" class="alert alert-success">
+            {{model.message}}
+        </div>
+
+        <label for="name">Website Name</label>
+        <input ng-model="website.name"
+               class="form-control"
+               id="name"
+               placeholder="Website Name">
+
+        <label for="description">Website Description</label>
+        <textarea ng-model="website.description"
+                  class="form-control" id="description" placeholder="Description"></textarea>
+
+        <a href="#/user/{{model.userId}}/website" class="btn btn-danger btn-block">
+            Cancel
+        </a>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}/">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

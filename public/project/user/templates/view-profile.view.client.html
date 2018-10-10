@@ -1,0 +1,122 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <ul class="nav navbar-nav pull-left">
+                <li>
+                    <a ng-click="model.back()"><span class="fui-arrow-left"></span></a>
+                </li>
+            </ul>
+            <div class="navbar-header">
+                <a class="navbar-brand">User Profile</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li>
+                    <a ng-click="model.back()"><span class="fui-cross"></span>Close</a>
+                </li>
+            </ul>
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+
+
+<div class="row ">
+    <div class="wjl-user-details-container ">
+        <div class="demo-browser">
+            <div class="demo-browser-side">
+                <img ng-src="{{model.user.portrait}}"
+                     class="demo-browser-author"/>
+                <div class="demo-browser-action hidden-xs">
+                    <div ng-show="model.viewee.type == 'borrower'|| model.viewee == undefined">
+                        <a ng-click="model.follow()"
+                           class="btn btn-default btn-lg btn-block wjl-btn-follow">
+                            <span class="fui-plus"></span>Follow
+                        </a>
+                    </div>
+                </div>
+                <div class="demo-browser-action visible-xs">
+                    <div ng-show="model.viewee.type == 'borrower'|| model.viewee == undefined">
+                        <a ng-click="model.follow()"
+                           class="btn btn-default btn-sm btn-block wjl-btn-follow-sm">
+                            ＋
+                        </a>
+                    </div>
+                </div>
+
+                <h5>@{{model.user.username}}</h5>
+                <h6><strong>{{model.user.email}}</strong></h6>
+                <h6>
+                    {{model.user.personalInfo}}
+                </h6>
+
+                <div ng-show="model.error" class="alert alert-danger wlj-margin-top-10">
+                    {{model.error}}
+                </div>
+
+                <div ng-show="model.message" class="alert alert-success wlj-margin-top-10">
+                    {{model.message}}
+                </div>
+            </div>
+
+            <div class="demo-browser-content">
+                <div class="row">
+                    <div class="row">
+                        <div class="pull-right demo-browser-content-list">
+                            <div class="demo-browser-content-text medium"><h4><strong>Book List</strong></h4></div>
+                            <div class="wjl-divider"></div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="panel wjl-view-profile-list-container">
+                            <ul class="list-group ">
+                                <div class="panel-heading panel-success">
+                                    <div class="row">
+                                        <div class="col-sm-4 hidden-xs">
+                                            <div class="text-center">
+                                                <strong>Photo</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-6">
+                                            <div class="pull-left">
+                                                <strong>Name</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-6">
+                                            <div class="pull-left">
+                                                <strong>Author</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <li ng-repeat="book in model.books"
+                                    class="list-group-item wjl-view-profile-list-hover wjl-view-profile-list" >
+                                    <div class="row">
+                                        <div class="col-sm-4 hidden-xs" >
+                                            <a ng-click="model.viewBookDetails(book._id)">
+                                                <img class="wjl-mybooks-pic text-center"
+                                                     ng-src="{{book.photo}}"/>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-6">
+                                            <div class="pull-left">
+                                                {{book.name}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-6">
+                                            <div class="pull-left">
+                                                {{book.author}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- /download area -->

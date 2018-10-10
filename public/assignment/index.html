@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="WebAppMaker">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Title for Index Page</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="textAngular/textAngular.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" rel="stylesheet"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+
+    <!--configurations-->
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!--controllers-->
+    <script src="user/controllers/login.controller.client.js"></script>
+    <script src="user/controllers/register.controller.client.js"></script>
+    <script src="user/controllers/profile.controller.client.js"></script>
+    <script src="website/controllers/website-list.controller.client.js"></script>
+    <script src="website/controllers/website-edit.controller.client.js"></script>
+    <script src="website/controllers/website-new.controller.client.js"></script>
+    <script src="page/controllers/page-list.controller.client.js"></script>
+    <script src="page/controllers/page-edit.controller.client.js"></script>
+    <script src="page/controllers/page-new.controller.client.js"></script>
+    <script src="widget/controllers/widget-list.controller.client.js"></script>
+    <script src="widget/controllers/widget-edit.controller.client.js"></script>
+    <script src="widget/controllers/widget-chooser.controller.client.js"></script>
+    <script src="widget/controllers/widget-flickr-search.controller.client.js"></script>
+
+    <script src="./textAngular/textAngular-rangy.min.js"></script>
+    <script src="./textAngular/textAngular-sanitize.min.js"></script>
+    <script src="./textAngular/textAngular.min.js"></script>
+
+    <!--services-->
+    <script src="services/user.service.client.js"></script>
+    <script src="services/page.service.client.js"></script>
+    <script src="services/website.service.client.js"></script>
+    <script src="services/widget.service.client.js"></script>
+    <script src="services/flickr.service.client.js"></script>
+
+    <script src="../directives/wjl-sortable.js"></script>
+
+</head>
+
+<body>
+    <div ng-view></div>
+</body>
+</html>

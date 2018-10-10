@@ -1,0 +1,55 @@
+<nav class="navbar navbar-light-grey navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">Choose Widget</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a ng-click="model.addWidget('HEADER')">
+                Header
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a ng-click="model.addWidget('IMAGE')">
+                Image
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a ng-click="model.addWidget('YOUTUBE')">
+                Youtube
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a ng-click="model.addWidget('HTML')">
+                Html
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a ng-click="model.addWidget('TEXT')">
+                TEXT
+            </a>
+        </li>
+    </ul>
+</div>
+
+<nav class="navbar navbar-light-grey navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}/">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

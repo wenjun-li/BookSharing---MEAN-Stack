@@ -1,0 +1,82 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#/">MyBook</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/home">Home</a></li>
+                    <li><a href="#/book-list">Book List</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="#/login"><span class="fui-arrow-right"></span>Login<span class="navbar-new"></span></a>
+                    </li>
+                    <li>
+                        <a href="#/register"><span class="fui-user">Register</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+<div class="wjl-login-background"></div>
+
+<div class="container-fluid wjl-login-container">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <div class="col-sm-3 hidden-xs">
+        <div class="wjl-login-icon">
+            <img src="../../../project/img/login/icon.png" alt="Welcome to MyBook" />
+            <h4>Welcome to <small>MyBook</small></h4>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-9">
+        <div class="login-form wjl-login-form">
+            <div class="form-group">
+                <input ng-model="user.username"
+                       type="text"
+                       class="form-control login-field"
+                       placeholder="Username"
+                       id="login-name" />
+                <label class="login-field-icon fui-user" for="login-name"></label>
+            </div>
+
+            <div class="form-group">
+                <input ng-model="user.password"
+                       type="password"
+                       class="form-control login-field"
+                       placeholder="Password"
+                       id="login-pass" />
+                <label class="login-field-icon fui-lock" for="login-pass"></label>
+            </div>
+
+
+            <a ng-click="model.login(user)"
+               class="btn btn-primary btn-lg btn-block">
+                Log in
+            </a>
+            <a href="/auth/facebook/"
+               class="btn btn-primary btn-lg btn-block wjl-facebook-color">
+                <span class="fui-facebook"></span>&emsp;
+                Facebook
+            </a>
+            <a href="/auth/google"
+               class="btn btn-primary btn-lg btn-block wjl-google-plus-color">
+                <span class="fui-google-plus"></span>&emsp;
+                Google+
+            </a>
+            <a class="login-link" href="#/register">Not a member?</a>
+        </div>
+    </div>
+
+</div>

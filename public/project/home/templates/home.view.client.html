@@ -1,0 +1,52 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#/">MyBook</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/home">Home<span class="navbar-new"></span></a></li>
+                    <li><a href="#/book-list">Book List</a></li>
+                </ul>
+                <ul ng-if="model.user != undefined" class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#/user/profile"><span class="fui-info-circle"></span>Profile</a>
+                    </li>
+                    <li ng-show="model.isAdmin == true">
+                        <a href="#/admin/user">
+                            <span class="fui-gear"></span>Controll Center</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="model.logout()">
+                            <span class="glyphicon glyphicon-off"></span>Logout
+                        </a>
+                    </li>
+                </ul>
+                <ul ng-if="model.user == undefined" class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="#/login"><span class="fui-arrow-right"></span>Login</a>
+                    </li>
+                    <li>
+                        <a href="#/register"><span class="fui-user">Register</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+<div class="row">
+    <div class="home-img">
+        <div class="wjl-home-welcom-container">
+            <h3 class="text-center">Welcome to MyBook</h3>
+            <h6 class="text-center">MyBook is a place where you can share and borrow books</h6>
+        </div>
+        <div class="wjl-home-search-container">
+        </div>
+    </div>
+</div>

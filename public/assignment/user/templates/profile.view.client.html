@@ -1,0 +1,87 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <span ng-click="model.updateUser(model.user)"
+                  class="glyphicon glyphicon-ok"></span>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/user/{{model.userId}}/">Profile</a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <div ng-show="model.message" class="alert alert-success">
+        {{model.message}}
+    </div>
+
+    <form>
+        <div class="form-group">
+            <label for="username-profile">Username</label>
+            <input ng-model="model.user.username"
+                   id="username-profile"
+                   type="text"
+                   class="form-control"
+                   placeholder="Username">
+        </div>
+
+        <div class="form-group">
+            <label for="email-profile">Email</label>
+            <input ng-model="model.user.email"
+                   id="email-profile"
+                   type="email"
+                   class="form-control"
+                   placeholder="Email">
+        </div>
+
+        <div class="form-group">
+            <label for="firstName-profile">First Name</label>
+            <input ng-model="model.user.firstName"
+                   id="firstName-profile"
+                   type="text"
+                   class="form-control"
+                   placeholder="First Name">
+        </div>
+
+        <div class="form-group">
+            <label for="last-name-profile">Last Name</label>
+            <input ng-model="model.user.lastName"
+                   id="last-name-profile"
+                   type="text"
+                   class="form-control"
+                   placeholder="Last Name">
+        </div>
+    </form>
+
+    <label for="websites-profile">Websites</label>
+    <a id="websites-profile"
+       href="#/user/{{model.userId}}/website"
+       class="btn btn-block btn-primary">Websites</a>
+
+    <label for="logout-profile">Logout</label>
+    <a id="logout-profile"
+       href="#/login"
+       class="btn btn-block btn-danger">
+        Logout
+    </a>
+
+    <label for="unregister-profile">Unregister</label>
+    <a id="unregister-profile"
+       ng-click="model.unregisterUser(model.user)"
+       class="btn btn-block btn-danger">Unregister</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}/">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

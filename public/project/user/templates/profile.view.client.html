@@ -1,0 +1,589 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#/">MyBook</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul class="nav navbar-nav">
+                    <li ng-show="model.isAdmin == false"><a href="#/">Home</a></li>
+                    <li><a href="#/book-list">Book List</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#/user/profile">
+                            <span class="fui-info-circle"></span>Profile<span class="navbar-new">
+                        </span></a>
+                    </li>
+                    <li ng-show="model.isAdmin == true">
+                        <a href="#/admin/user">
+                            <span class="fui-gear"></span>Controll Center</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="model.logout()">
+                            <span class="glyphicon glyphicon-off"></span>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+<div class="container-fluid wjl-profile-container">
+    <div class="row">
+        <div class="col-xs-12 bhoechie-tab-container">
+            <div class="col-sm-2 col-xs-3 bhoechie-tab-menu">
+                <div class="list-group">
+                    <a class="list-group-item text-center wjl-vertical-tabs"
+                       ng-class="{'active': model.tabName == 'profile'}"
+                       ng-click="model.changeTab('profile')">
+                        <h5 class="glyphicon glyphicon-user"></h5><br/>Profile
+                    </a>
+
+                    <a ng-show="model.user.type == 'librarian' || model.user.type == 'admin'"
+                       class="list-group-item text-center wjl-vertical-tabs"
+                       ng-class="{'active': model.tabName == 'myBooks'}"
+                       ng-click="model.changeTab('myBooks')">
+                        <h5 class="glyphicon glyphicon-book"></h5><br/>My Books
+                    </a>
+
+                    <a ng-show="model.user.type == 'borrower'|| model.user.type == 'admin'"
+                       class="list-group-item text-center"
+                       ng-class="{'active': model.tabName == 'following'}"
+                       ng-click="model.changeTab('following')">
+                        <h5 class="glyphicon glyphicon-thumbs-up"></h5><br/>Following
+                    </a>
+
+                    <a ng-show="model.user.type == 'borrower'|| model.user.type == 'admin'"
+                       class="list-group-item text-center wjl-vertical-tabs"
+                       ng-class="{'active': model.tabName == 'myBorrows'}"
+                       ng-click="model.changeTab('myBorrows')">
+                        <h5 class="glyphicon glyphicon-log-in"></h5><br/>My Borrows
+                    </a>
+
+                    <a ng-show="model.user.type == 'librarian'|| model.user.type == 'admin'"
+                       class="list-group-item text-center wjl-vertical-tabs"
+                       ng-class="{'active': model.tabName == 'myLends'}"
+                       ng-click="model.changeTab('myLends')">
+                        <h5 class="glyphicon glyphicon-send"></h5><br/>My Lends
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-10 col-xs-9 bhoechie-tab">
+                <!--profile tab page-->
+                <div ng-show="model.tabName=='profile'"  class="tab-pane" >
+                    <div ng-show="model.profileError" class="alert alert-danger">
+                        {{model.profileError}}
+                    </div>
+
+                    <h5 class="text-center">Profile</h5>
+                    <hr class="star-primary">
+                    <br/>
+                    <div>
+                        <div class="col-xs-4 hidden-xs">
+                            <div class="pull-right form-group-sm wjl-form-group">
+                                <label class="wjl-label">Portrait</label>
+
+                                <div class="wjl-upload-book-pic-container">
+                                    <div class="col-xs-3">
+                                        <div ng-style="{'background-image': 'url(' + model.user.portrait + ')'}"
+                                             class="wjl-portrait-pic" >
+                                            <form  id="portraitForm"
+                                                   onchange="submitPortraitForm()"
+                                                   action="/api/uploadPortrait"
+                                                   method="post"
+                                                   class="wjl-book-pic-input"
+                                                   enctype="multipart/form-data">
+                                                <input name="myFile"
+                                                       type="file"
+                                                       class="wjl-book-pic-input"
+                                                       accept="image/*"/>
+                                                <input  name="userId"
+                                                        value="{{model.user._id}}"
+                                                        class="wjl-hidden"/>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row visible-xs">
+                            <div class="pull-right form-group-sm wjl-form-group">
+                                <label class="wjl-label">Portrait</label>
+
+                                <div class="wjl-upload-book-pic-container">
+                                    <div class="col-xs-3">
+                                        <div ng-style="{'background-image': 'url(' + model.user.portrait + ')'}"
+                                             class="wjl-portrait-pic" >
+                                            <form  id="portraitForm"
+                                                   onchange="submitPortraitForm()"
+                                                   action="/api/uploadPortrait"
+                                                   method="post"
+                                                   class="wjl-book-pic-input"
+                                                   enctype="multipart/form-data">
+                                                <input name="myFile"
+                                                       type="file"
+                                                       class="wjl-book-pic-input"
+                                                       accept="image/*"/>
+                                                <input  name="userId"
+                                                        value="{{model.user._id}}"
+                                                        class="wjl-hidden"/>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-7 hidden-xs">
+                            <div class="row">
+                                <div class="form-group-sm wjl-form-group">
+                                    <label class="wjl-label">Username: </label>
+                                    <input ng-model="model.user.username"
+                                           class="form-control wjl-disabled-input"
+                                           disabled
+                                           type="text"
+                                           placeholder="Userame"/>
+                                </div>
+                                <div class="form-group-sm wjl-form-group">
+                                    <label class="wjl-label">Email</label>
+                                    <input ng-model="model.user.email"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="Email"/>
+                                </div>
+                                <div class="form-group-sm wjl-form-group">
+                                    <label class="wjl-label">Personal Info</label>
+                                    <input ng-model="model.user.personalInfo"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="Personal Info"/>
+                                </div>
+
+                                <div class="pull-right">
+                                    <a ng-click="model.updateUser(model.user)"
+                                       class="btn btn-primary btn-lg wjl-btn">Update</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row visible-xs">
+                            <div class="row">
+                                <div class="form-group-sm wjl-form-group">
+                                    <label class="wjl-label">Username: </label>
+                                    <input ng-model="model.user.username"
+                                           class="form-control wjl-disabled-input"
+                                           disabled
+                                           type="text"
+                                           placeholder="Userame"/>
+                                </div>
+                                <div class="form-group-sm wjl-form-group">
+                                    <label class="wjl-label">Email</label>
+                                    <input ng-model="model.user.email"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="Email"/>
+                                </div>
+                                <div class="form-group-sm wjl-form-group">
+                                    <label class="wjl-label">Personal Info</label>
+                                    <input ng-model="model.user.personalInfo"
+                                           class="form-control"
+                                           type="text"
+                                           placeholder="Personal Info"/>
+                                </div>
+
+                                <div class="pull-right">
+                                    <a ng-click="model.updateUser(model.user)"
+                                       class="btn btn-primary btn-lg wjl-btn">Update</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--myBooks tab page-->
+                <div ng-show="model.tabName=='myBooks'"  class="tab-pane" >
+                    <h5 class="text-center">My Books</h5>
+                    <hr class="star-primary">
+
+                    <div ng-show="model.myBooksError" class="alert alert-danger">
+                        {{model.myBooksError}}
+                    </div>
+
+                    <div class="row demo-row">
+                        <div class="pull-right">
+                            <a ng-click="model.addBook()" class="btn btn-inverse">Add Book</a>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="panel">
+                            <ul class="list-group">
+                                <div class="panel-heading panel-success">
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs">
+                                            <div class="text-center">
+                                                <strong>Photo</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-7">
+                                            <div class="pull-left">
+                                                <strong>Name</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 hidden-xs">
+                                            <div class="pull-right">
+                                                <strong>Availability</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-5">
+                                            <div class="pull-right">
+                                                <strong>Edit</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <li ng-repeat="book in model.myBooks"
+                                    class="list-group-item wjl-hover" >
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs" >
+                                            <img class="wjl-mybooks-pic text-center"
+                                                 ng-src="{{book.photo}}"/>
+                                        </div>
+
+                                        <div class="col-sm-9 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-7">
+                                                    <div class="pull-left">
+                                                        <div class="wjl-vertical-center">{{book.name}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 hidden-xs">
+                                                    <div class="text-center">
+                                                        <div ng-if="book.availability == true">
+                                                            <h4 class="fui-check"></h4>
+                                                        </div>
+                                                        <div ng-if="book.availability == false">
+                                                            <h4 class="fui-cross"></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-5">
+                                                    <div class="pull-right">
+                                                        <a href="#/user/{{model.tabName}}/{{book._id}}/book-edit">
+                                                            <h5><span class="fui-new"></span></h5>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-fluid wjl-myBooks-description hidden-xs">
+                                                <strong>Description: </strong>{{book.description}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--following tab page-->
+                <div ng-show="model.tabName=='following'"  class="tab-pane" >
+                    <h5 class="text-center">Following</h5>
+                    <hr class="star-primary">
+                    <div class="wjl-follow-right-container">
+                        <div class="panel">
+                            <ul class="list-group">
+                                <div class="panel-heading panel-success">
+                                    <div class="row">
+                                        <div class="col-xs-3 hidden-xs">
+                                            <strong>Portrait</strong>
+                                            <a>
+                                                <span class="glyphicon glyphicon-triangle-top"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <strong>Username</strong>
+                                            <a>
+                                                <span class="glyphicon glyphicon-triangle-top"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-4 pull-right">
+                                            <strong>Unfollow</strong>
+                                            <a>
+                                                <span class="glyphicon glyphicon-triangle-top"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <li ng-repeat="user in model.myFollows"
+                                    class="list-group-item wjl-hover" >
+                                    <div class="row">
+                                        <div class="col-xs-3 hidden-xs">
+                                            <a href="#/user/{{model.tabName}}/view-profile/{{user._id}}">
+                                                <img ng-src="{{user.portrait}}"
+                                                     class="wjl-my-follows-portrait"/>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="wjl-follow-username">
+                                                {{user.username}}
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <div class="wjl-follow-del">
+                                                <a ng-click="model.unFollow(user._id)">
+                                                    <span class="fui-cross"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--myBorrows tab page-->
+                <div ng-show="model.tabName=='myBorrows'"  class="tab-pane" >
+                    <h5 class="text-center">My Borrows</h5>
+                    <hr class="star-primary">
+
+                    <div class="container-fluid">
+                        <div class="panel">
+                            <ul class="list-group">
+                                <div class="panel-heading panel-success">
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs">
+                                            <div class="text-center">
+                                                <strong>Photo</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-7">
+                                            <div class="pull-left">
+                                                <strong>Name</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 hidden-xs">
+                                            <div class="pull-left">
+                                                <strong>Lender</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-5">
+                                            <div class="pull-right">
+                                                <strong>State</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <li ng-repeat="borrow in model.myBorrows"
+                                    class="list-group-item wjl-hover" >
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs" >
+                                            <img class="wjl-mybooks-pic text-center"
+                                                 ng-src="{{borrow.bookPhoto}}"/>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-7">
+                                            <div class="pull-left">
+                                                <div class="wjl-vertical-center">{{borrow.bookName}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 hidden-xs">
+                                            <a class="text-center"
+                                               href="#/user/{{model.tabName}}/view-profile/{{borrow.lenderId}}">
+                                                <img ng-src="{{borrow.lenderPortrait}}"
+                                                     class="wjl-my-follows-portrait"/>
+                                            </a>
+                                            <div class="pull-left">
+                                                @{{borrow.lenderName}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-5">
+                                            <div ng-show="borrow.state == 'PENDING'">
+                                                <div class="pull-right wjl-text-right wjl-silver-text">
+                                                    PENDING
+                                                    <div class="wjl-divider-silver"></div>
+                                                    <a ng-click="model.cancelBorrow(borrow._id)">Cancel</a>
+                                                </div>
+                                            </div>
+                                            <div ng-show="borrow.state == 'BORROWED'">
+                                                <div class="pull-right wjl-text-right wjl-silver-text">
+                                                    IN USE
+                                                    <div class="wjl-divider-silver"></div>
+                                                    <a ng-click="model.finishBorrow(borrow._id)">Return</a>
+                                                </div>
+                                            </div>
+                                            <div ng-show="borrow.state == 'RETURNED'">
+                                                <div class="pull-right wjl-text-right wjl-silver-text">
+                                                    FINISHED
+                                                </div>
+                                            </div>
+                                            <div ng-show="borrow.state == 'REJECTED'">
+                                                <div class="pull-right wjl-text-right wjl-silver-text">
+                                                    REJECTED
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--myLends tab page-->
+                <div ng-show="model.tabName=='myLends'"  class="tab-pane" >
+                    <h5 class="text-center">My Lends</h5>
+                    <hr class="star-primary">
+
+                    <div class="container-fluid">
+                        <div class="panel">
+                            <ul class="list-group">
+                                <div class="panel-heading panel-success">
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs">
+                                            <div class="text-center">
+                                                <strong>Photo</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-7">
+                                            <div class="pull-left">
+                                                <strong>Name</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 hidden-xs">
+                                            <div class="pull-left">
+                                                <strong>Borrower</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-5">
+                                            <div class="pull-right">
+                                                <strong>State</strong>
+                                                <a>
+                                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <li ng-repeat="lend in model.myLends"
+                                    class="list-group-item wjl-hover" >
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs" >
+                                            <img class="wjl-mybooks-pic text-center"
+                                                 ng-src="{{lend.bookPhoto}}"/>
+                                        </div>
+                                        <div class="col-sm-9 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-sm-5 col-xs-7">
+                                                    <div class="pull-left">
+                                                        <div class="wjl-vertical-center">{{lend.bookName}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 hidden-xs">
+                                                    <img ng-src="{{lend.borrowerPortrait}}"
+                                                         class="wjl-my-follows-portrait"/>
+                                                    @{{lend.borrowerName}}
+                                                    {{lend.borrowerEmail}}
+                                                </div>
+                                                <div class="col-sm-3 col-xs-5">
+                                                    <div ng-show="lend.state == 'PENDING'">
+                                                        <div class="pull-right wjl-text-right">
+                                                            <a ng-click="model.acceptToLend(lend._id)">Accept</a>
+                                                            <div class="wjl-divider-silver"></div>
+                                                            <a ng-click="model.declineToLend(lend._id)">Decline</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div ng-show="lend.state == 'REJECTED'">
+                                                        <div class="pull-right wjl-text-right">
+                                                            REJECTED
+                                                        </div>
+                                                    </div>
+
+                                                    <div ng-show="lend.state == 'BORROWED'">
+                                                        <div class="pull-right wjl-text-right">
+                                                            BORROWED OUT
+                                                        </div>
+                                                    </div>
+
+                                                    <div ng-show="lend.state == 'RETURNED'">
+                                                        <div class="pull-right wjl-text-right">
+                                                            FINISHED
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row wjl-book-list-descrp">
+                                                <strong>Request Message:&emsp;</strong>
+                                                {{lend.requestMessage}}
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

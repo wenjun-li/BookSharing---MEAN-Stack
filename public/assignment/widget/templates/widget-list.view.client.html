@@ -1,0 +1,73 @@
+<nav class="navbar navbar-light-grey navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </div>
+
+        <div class="navbar-header">
+            <a class="navbar-brand"
+               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                Widgets
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div wjl-sortable>
+
+        <div ng-repeat="widget in model.widgets">
+            <div class="wjl-toolbar">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                <span class="glyphicon glyphicon-align-justify"></span>
+            </div>
+            <div ng-switch="widget.type">
+                <div ng-switch-when="HEADER">
+                    <h1 ng-if="widget.size == 1">{{widget.text}}</h1>
+                    <h2 ng-if="widget.size == 2">{{widget.text}}</h2>
+                    <h3 ng-if="widget.size == 3">{{widget.text}}</h3>
+                    <h4 ng-if="widget.size == 4">{{widget.text}}</h4>
+                    <h5 ng-if="widget.size == 5">{{widget.text}}</h5>
+                    <h6 ng-if="widget.size == 6">{{widget.text}}</h6>
+                </div>
+                <div ng-switch-when="IMAGE">
+                    <img ng-src="{{widget.url}}" width="{{widget.width}}"/>
+                </div>
+                <div class="youtube-widget" ng-switch-when="YOUTUBE">
+                    <iframe width="{{widget.width}}" ng-src="{{model.doYouTrustUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div ng-switch-when="HTML">
+                    <div ng-bind-html="model.convertHtml(widget.text)"></div>
+                </div>
+                <div ng-switch-when="TEXT">
+                    <div ng-if="widget.formatted" text-angular ta-toolbar="..."></div>
+                    <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                           placeholder="{{widget.textInput.placeholder}}" class="form-control"/>
+                    <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                              rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                              class="form-control">{{widget.text}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-light-grey navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}/">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

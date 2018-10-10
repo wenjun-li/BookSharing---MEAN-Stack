@@ -1,0 +1,74 @@
+<nav class="navbar navbar-light-grey navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+        <div class="navbar-text pull-right">
+            <a ng-click="model.editWidget(model.widget)">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand"
+               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
+                Edit Image Widget
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <label for="url-widget-image">URL</label>
+    <input ng-model="model.widget.url"
+            id="url-widget-image"
+           type="text"
+           class="form-control"
+           value="Wireframe"/>
+
+    <label for="width-widget-image">Width</label>
+    <input ng-model="model.widget.width"
+           id="width-widget-image"
+           type="text"
+           class="form-control"
+           value="Wireframe"/>
+
+    <form  id="upload-image" action="/api/upload" method="post" enctype="multipart/form-data">
+        <input  name="myFile"   type="file" class="form-control"/>
+        <input  name="userId"    value="{{model.userId}}" class="uploadImg"/>
+        <input  name="websiteId" value="{{model.websiteId}}"   class="uploadImg"/>
+        <input  name="pageId" value="{{model.pageId}}"   class="uploadImg"/>
+        <input  name="width"    value="{{model.widget.width}}" class="uploadImg"/>
+        <input  name="widgetId" value="{{model.widget._id}}"   class="uploadImg"/>
+        <button type="submit"
+                class="btn btn-block btn-primary">Upload Image</button>
+    </form>
+
+    <label for="search-widget-image"></label>
+    <a id="search-widget-image"
+       href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr"
+       class="btn btn-block btn-primary">
+        Search
+    </a>
+
+    <label for="delete-widget-image"></label>
+    <a id="delete-widget-image"
+       ng-click="model.deleteWidget()"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+
+
+</div>
+
+<nav class="navbar navbar-light-grey navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}/">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

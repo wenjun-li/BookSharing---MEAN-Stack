@@ -1,0 +1,160 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <ul class="nav navbar-nav pull-left">
+                <li>
+                    <a ng-click="model.back()"><span class="fui-arrow-left"></span></a>
+                </li>
+            </ul>
+            <div class="navbar-header">
+                <a class="navbar-brand">Edit Book</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li>
+                    <a ng-click="model.back()"><span class="fui-cross"></span>Cacel</a>
+                </li>
+            </ul>
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+<!-- Contact Section -->
+<div class="container-fluid">
+
+    <h5 class="text-center">Edit Book</h5>
+    <hr class="star-primary">
+
+
+    <div class="wjl-book-edit-container">
+        <div class="col-xs-5">
+            <div class="pull-right form-group-sm wjl-form-group">
+                <label class="wjl-label">Book Photo</label>
+
+                <div class="wjl-upload-book-pic-container">
+                    <div class="col-xs-3">
+                        <div ng-style="{'background-image': 'url(' + model.book.photo + ')'}"
+                             class="wjl-book-pic" >
+                            <form  id="editBookPicForm"
+                                   action="/api/uploadBookPhoto"
+                                   method="post"
+                                   class="wjl-book-pic-input"
+                                   enctype="multipart/form-data">
+                                <input ng-model="model.book.photo"
+                                       name="myFile"
+                                       onchange="submitUploadBookPicForm()"
+                                       type="file"
+                                       class="wjl-book-pic-input"
+                                       accept="image/*"/>
+                                <input  name="bookId"
+                                        value="{{model.bookId}}"
+                                        class="wjl-hidden"/>
+                                <input  name="userId"
+                                        value="{{model.user._id}}"
+                                        class="wjl-hidden"/>
+                                <input  name="tabName"
+                                        value="{{model.tabName}}"
+                                        class="wjl-hidden"/>
+                            </form>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="wjl-label wjl-margin-top-35 wjl-inline">Availablity:</label>
+                            <input class="wjl-checkbox wjl-inline"
+                                    ng-model="model.book.availability"
+                                   type="checkbox"
+                                   checked="checked"
+                                   data-toggle="checkbox" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-7 hidden-xs">
+            <div class="pull-left wjl-profile-right-container">
+                <div class="form-group-sm wjl-form-group">
+                    <label class="wjl-label">Book Name</label>
+                    <input ng-model="model.book.name"
+                           class="form-control" type="text" placeholder="Book Name"/>
+                </div>
+                <div class="form-group-sm wjl-form-group">
+                    <label class="wjl-label">Author</label>
+                    <input ng-model="model.book.author"
+                           class="form-control" type="text" placeholder="Author"/>
+                </div>
+                <div class="form-group-sm wjl-form-group">
+                    <label class="wjl-label">ISBN</label>
+                    <input ng-model="model.book.ISBN"
+                           class="form-control" type="text" placeholder="ISBN"/>
+                </div>
+                <div class="form-group-sm wjl-form-group">
+                    <label class="wjl-label">Desciption</label>
+                    <div class="wjl-book-description-input-container">
+                        <textarea
+                               ng-model="model.book.description"
+                               class="form-control wjl-book-description-textarea"
+                               placeholder="Description">
+                        </textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <a ng-click="model.updateBook(model.book)"
+                       class="btn btn-primary btn-lg pull-right wjl-book-edit-btn">
+                        Update
+                    </a>
+                </div>
+                <div class="row">
+                    <a ng-click="model.deleteBook()"
+                       class="btn btn-danger btn-lg pull-right wjl-book-edit-btn">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="visible-xs col-xs-7">
+            <div class="pull-left">
+                <div class="form-group-sm wjl-form-group">
+                    <label class="wjl-label">Book Name</label>
+                    <input ng-model="model.book.name"
+                           class="form-control" type="text" placeholder="Book Name"/>
+                </div>
+                <div class="form-group-sm wjl-form-group">
+                    <label class="wjl-label">Author</label>
+                    <input ng-model="model.book.author"
+                           class="form-control" type="text" placeholder="Author"/>
+                </div>
+                <div class="form-group-sm wjl-form-group">
+                    <label class="wjl-label">ISBN</label>
+                    <input ng-model="model.book.ISBN"
+                           class="form-control" type="text" placeholder="ISBN"/>
+                </div>
+                <div class="form-group-sm wjl-form-group">
+                    <label class="wjl-label">Desciption</label>
+                    <div class="wjl-book-description-input-container">
+                        <textarea
+                                ng-model="model.book.description"
+                                class="form-control wjl-book-description-textarea"
+                                placeholder="Description">
+                        </textarea>
+                    </div>
+                </div>
+
+                <div class="row visible-xs">
+                    <a ng-click="model.updateBook(model.book)"
+                       class="btn btn-primary btn-lg pull-right">
+                        Update
+                    </a>
+                </div>
+                <div class="row visible-xs">
+                    <a ng-click="model.deleteBook()"
+                       class="btn btn-danger btn-lg pull-right">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

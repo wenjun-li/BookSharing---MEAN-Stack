@@ -1,0 +1,100 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#/">MyBook</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/home">Home</a></li>
+                    <li><a href="#/book-list">Book List</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="#/login"><span class="fui-arrow-right"></span>Login</a>
+                    </li>
+                    <li>
+                        <a href="#/register"><span class="fui-user"></span>Register<span class="navbar-new"></span></a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+
+<div class="wjl-login-background"></div>
+
+<div class="container-fluid wjl-login-container">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <div class="col-sm-3 hidden-xs">
+        <div class="wjl-login-icon">
+            <img src="../../../project/img/login/icon.png" alt="Welcome to MyBook" />
+            <h4>Welcome to <small>MyBook</small></h4>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-9">
+        <div class="login-form wjl-login-form">
+            <div class="form-group">
+                <input ng-model="user.username"
+                       type="text"
+                       class="form-control login-field"
+                       placeholder="Username"  />
+                <label class="login-field-icon fui-user" ></label>
+            </div>
+
+            <div class="form-group">
+                <input ng-model="user.pwd"
+                       type="password"
+                       class="form-control login-field"
+                       placeholder="Password"  />
+                <label class="login-field-icon fui-lock" ></label>
+            </div>
+
+            <div class="form-group">
+                <input ng-model="user.verifyPwd"
+                       type="password"
+                       class="form-control login-field"
+                       placeholder="Verify Password"  />
+                <label class="login-field-icon fui-lock" ></label>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <div>
+                        <input class="magic-radio"
+                               type="radio"
+                               value="borrower"
+                               ng-model="user.type"
+                               id="registerAsBorrower"/>
+                        <label class="wjl-label-for-radio-btn"
+                               for="registerAsBorrower">Register as Borrower</label>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div>
+                        <input class="magic-radio"
+                               ng-model="user.type"
+                               type="radio"
+                               id="registerAsLender"
+                               value="librarian"/>
+                        <label class="wjl-label-for-radio-btn"
+                               for="registerAsLender">Register as Lender</label>
+                    </div>
+                </div>
+            </div>
+
+            <a class="btn btn-primary btn-lg btn-block" ng-click="model.register(user)">Register</a>
+            <a class="login-link" href="#/login">Already a member?</a>
+        </div>
+    </div>
+
+</div>

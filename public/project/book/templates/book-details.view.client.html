@@ -1,0 +1,504 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <ul class="nav navbar-nav pull-left">
+                <li>
+                    <a ng-click="model.back()"><span class="fui-arrow-left"></span></a>
+                </li>
+            </ul>
+            <div class="navbar-header">
+                <a class="navbar-brand">Book Details</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li>
+                    <a ng-click="model.back()"><span class="fui-cross"></span>Close</a>
+                </li>
+            </ul>
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+<!-- Contact Section -->
+<div class="container-fluid">
+
+    <div ng-show="model.error" class="alert alert-danger wlj-margin-top-10">
+        {{model.error}}
+    </div>
+
+    <div ng-show="model.message" class="alert alert-success wlj-margin-top-10">
+        {{model.message}}
+    </div>
+
+    <h5 class="text-center">Lender's Introduction</h5>
+    <hr class="wjl-book-details-divider">
+
+    <div class="wjl-book-details-container">
+        <div class="row wjl-margin-top-50">
+            <div class="col-sm-5 hidden-xs">
+                <img class="pull-right wjl-book-details-pic"
+                     ng-src="{{model.book.photo}}"/>
+            </div>
+
+            <div class="row visible-xs">
+                <img class="text-center wjl-book-details-pic-sm"
+                     ng-src="{{model.book.photo}}"/>
+            </div>
+
+            <div class="col-sm-7 hidden-xs">
+            <!--owner-->
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="pull-left">
+                        <strong>Owner:</strong>
+                    </p>
+                </div>
+                <div class="col-xs-9 pull-right">
+                    <div class="row">
+                        <div class="wjl-book-details-owner-container">
+                            <a ng-click="model.viewUserDetails(model.book.owner)">
+                                <img class="wjl-my-follows-portrait"
+                                     ng-src="{{model.book.ownerPortrait}}" />
+                            </a>
+                        </div>
+                        <div class="wjl-book-details-owner-container">
+                            <h4>&ensp;{{model.book.ownerName}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="pull-left">
+                        <strong>ISBN:</strong>
+                    </p>
+                </div>
+                <div class="col-xs-9 pull-right">
+                    <p class="pull-left">
+                        {{model.book.ISBN}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="pull-left">
+                        <strong>Name:</strong>
+                    </p>
+                </div>
+                <div class="col-xs-9 pull-right">
+                    <p class="pull-left">
+                        {{model.book.name}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row hidden-xs">
+                <div class="col-xs-3">
+                    <p class="pull-left">
+                        <strong>Author:</strong>
+                    </p>
+                </div>
+                <div class="col-xs-9 pull-right">
+                    <p class="pull-left">
+                        {{model.book.author}}
+                    </p>
+                </div>
+            </div>
+
+
+                <div class="row visible-xs">
+                    <div class="row">
+                        <strong>Author:</strong>
+                    </div>
+                    <div class="row pull-right">
+                        <p class="pull-left">
+                            {{model.book.author}}
+                        </p>
+                    </div>
+                </div>
+
+
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="pull-left">
+                        <strong>Availability:</strong>
+                    </p>
+                </div>
+                <div class="col-sm-9 hidden-xs pull-right">
+                    <div ng-if="model.book.availability == true">
+                        <strong><span class="fui-check wjl-font-large"></span></strong>
+                    </div>
+                    <div ng-if="model.book.availability == false">
+                        <strong><span class="fui-cross wjl-font-large"></span></strong>
+                    </div>
+                </div>
+                <div class="col-xs-7 visible-xs pull-right">
+                    <div ng-if="model.book.availability == true">
+                        <strong><span class="fui-check wjl-font-large"></span></strong>
+                    </div>
+                    <div ng-if="model.book.availability == false">
+                        <strong><span class="fui-cross wjl-font-large"></span></strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row hidden-xs">
+                <div class="col-sm-3">
+                    <p class="pull-left">
+                        <strong>Description:</strong>
+                    </p>
+                </div>
+                <div class="col-sm-9 pull-right">
+                    <p class="pull-left">
+                        {{model.book.description}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="visible-xs row">
+                <p class="col-xs-7 pull-left">
+                    <strong>Description:</strong>
+                </p>
+                <p class="col-xs-11 pull-left wjl-book-details-dscrp-sm">
+                    {{model.book.description}}
+                </p>
+            </div>
+
+            <div ng-show="model.viewee.type == 'borrower' || model.viewee == undefined"
+                 class="row">
+
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <p class="pull-left">
+                                <strong>Borrow Book:</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row wjl-book-details-request-container">
+                            <textarea
+                                    ng-model="requestText"
+                                    class="form-control wjl-book-details-request-textarea"
+                                    placeholder="Description">
+                            </textarea>
+                    </div>
+                    <div class="row">
+                        <div class="wjl-send-request-btn-container">
+                            <a ng-click="model.sendRequest(requestText)"
+                               class="pull-right btn btn-primary btn-lg">Send Request</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+            <div class="row visible-xs">
+                <!--owner-->
+                <div class="row">
+                    <div class="row">
+                        <p class="pull-left">
+                            <strong>Owner:</strong>
+                        </p>
+                    </div>
+                    <div class="row pull-left">
+                        <div class="row">
+                            <div class="wjl-book-details-owner-container">
+                                <a ng-click="model.viewUserDetails(model.book.owner)">
+                                    <img class="wjl-my-follows-portrait"
+                                         ng-src="{{model.book.ownerPortrait}}" />
+                                </a>
+                            </div>
+                            <div class="wjl-book-details-owner-container">
+                                <h4>&ensp;{{model.book.ownerName}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row hidden-xs">
+                    <div class="col-xs-3">
+                        <p class="pull-left">
+                            <strong>ISBN:</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-9 pull-right">
+                        <p class="pull-left">
+                            {{model.book.ISBN}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row visible-xs">
+                    <div class="row">
+                        <strong>ISBN:</strong>
+                    </div>
+                    <div class="row">
+                        <p class="pull-left">
+                            {{model.book.ISBN}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row hidden-xs">
+                    <div class="col-xs-3">
+                        <p class="pull-left">
+                            <strong>Name:</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-9 pull-right">
+                        <p class="pull-left">
+                            {{model.book.name}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row visible-xs">
+                    <div class="row">
+                        <strong>Name:</strong>
+                    </div>
+                    <div class="row">
+                        <p class="pull-left">
+                            {{model.book.name}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row hidden-xs">
+                    <div class="col-xs-3">
+                        <p class="pull-left">
+                            <strong>Author:</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-9 pull-right">
+                        <p class="pull-left">
+                            {{model.book.author}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row visible-xs">
+                    <strong>Author:</strong>
+                    <p class="row pull-left">
+                        {{model.book.author}}
+                    </p>
+                </div>
+
+                <div class="row hidden-xs">
+                    <div class="col-xs-3">
+                        <p class="pull-left">
+                            <strong>Availability:</strong>
+                        </p>
+                    </div>
+                    <div class="col-sm-9 hidden-xs pull-right">
+                        <div ng-if="model.book.availability == true">
+                            <strong><span class="fui-check wjl-font-large"></span></strong>
+                        </div>
+                        <div ng-if="model.book.availability == false">
+                            <strong><span class="fui-cross wjl-font-large"></span></strong>
+                        </div>
+                    </div>
+                    <div class="col-xs-7 visible-xs pull-right">
+                        <p ng-if="model.book.availability == true">
+                            <strong><span class="fui-check wjl-font-large"></span></strong>
+                        </p>
+                        <p ng-if="model.book.availability == false">
+                            <strong><span class="fui-cross wjl-font-large"></span></strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row visible-xs">
+                    <div class="row">
+                        <strong>Availability:</strong>
+                    </div>
+                    <div class="row visible-xs pull-right">
+                        <div ng-if="model.book.availability == true">
+                            <strong><span class="fui-check wjl-font-large"></span></strong>
+                        </div>
+                        <div ng-if="model.book.availability == false">
+                            <strong><span class="fui-cross wjl-font-large"></span></strong>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row hidden-xs">
+                    <div class="col-sm-3">
+                        <p class="pull-left">
+                            <strong>Description:</strong>
+                        </p>
+                    </div>
+                    <div class="col-sm-9 pull-right">
+                        <p class="pull-left wjl-word-break">
+                            {{model.book.description}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="visible-xs row">
+                    <strong>Description:</strong>
+                    <p class="row pull-left wjl-word-break">
+                        {{model.book.description}}
+                    </p>
+                </div>
+
+                <div ng-show="model.viewee.type == 'borrower' || model.viewee == undefined"
+                     class="row">
+
+                    <div class="row hidden-xs">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <p class="pull-left">
+                                    <strong>Borrow Book:</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row wjl-book-details-request-container">
+                            <textarea
+                                    ng-model="requestText"
+                                    class="form-control wjl-book-details-request-textarea"
+                                    placeholder="Description">
+                            </textarea>
+                        </div>
+                        <div class="row">
+                            <div class="wjl-send-request-btn-container">
+                                <a ng-click="model.sendRequest(requestText)"
+                                   class="pull-right btn btn-primary btn-lg">Send Request</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row visible-xs">
+                        <div class="row">
+                            <div class="row">
+                                <p class="pull-left">
+                                    <strong>Borrow Book:</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row wjl-book-details-request-container-sm">
+                            <textarea
+                                    ng-model="requestText"
+                                    class="form-control wjl-book-details-request-textarea"
+                                    placeholder="Description">
+                            </textarea>
+                        </div>
+                        <div class="row">
+                            <div class="row wjl-margin-top-10">
+                                <a ng-click="model.sendRequest(requestText)"
+                                   class="pull-right btn btn-primary btn-lg">Send Request</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <h5 class="text-center">Google Book Infomation</h5>
+    <hr class="wjl-book-details-divider">
+
+    <div ng-show="model.showGoogleResult == true">
+        <div class="wjl-book-details-container wjl-margin-google-details">
+            <div class="row wjl-margin-top-50">
+                <div class="row">
+                    <div class="col-sm-5 hidden-xs">
+                        <img class="pull-right wjl-book-details-pic"
+                             ng-src="{{model.googleBookDetails.photo}}"/>
+                    </div>
+
+                    <div class="row visible-xs">
+                        <img class="text-center wjl-book-details-pic-sm"
+                             ng-src="{{model.googleBookDetails.photo}}"/>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <!--owner-->
+                        <div class="row hidden-xs">
+                            <div class="col-xs-3">
+                                <p class="pull-left">
+                                    <strong>Title:</strong>
+                                </p>
+                            </div>
+                            <div class="col-xs-9 pull-left">
+                                <div class="row">
+                                    {{model.googleBookDetails.title}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row visible-xs">
+                            <div class="row">
+                                <strong>Title:</strong>
+                            </div>
+                            <div class="row pull-left">
+                                <p class="row">
+                                    {{model.googleBookDetails.title}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row hidden-xs">
+                            <div class="col-xs-3">
+                                <p class="pull-left">
+                                    <strong>Authors:</strong>
+                                </p>
+                            </div>
+                            <div class="col-xs-9">
+                                <div class="row pull-left">
+                                    {{model.googleBookDetails.authors}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row visible-xs">
+                            <strong>Authors:</strong>
+                            <p class="row pull-left">
+                                {{model.googleBookDetails.authors}}
+                            </p>
+                        </div>
+
+
+                        <div class="row hidden-xs">
+                            <div class="col-xs-3">
+                                <p class="pull-left">
+                                    <strong>Description:</strong>
+                                </p>
+                            </div>
+                            <div class="col-xs-9">
+                                <div class="row pull-left wjl-word-break">
+                                    {{model.googleBookDetails.description}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row visible-xs">
+                            <strong>Description:</strong>
+                            <p class="row pull-left wjl-word-break">
+                                {{model.googleBookDetails.description}}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <!--<div class="wjl-silver-text wjl-google-description-container">-->
+                    <!--<strong>Description: &emsp;</strong>-->
+                    <!--{{model.googleBookDetails.description}}-->
+                <!--</div>-->
+
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="model.showGoogleResult == false">
+        <div class="wjl-book-details-container wjl-margin-google-details text-center">
+            Could not find book by the ISBN provided by lender.
+        </div>
+    </div>
+
+</div>

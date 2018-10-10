@@ -1,0 +1,167 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#/">MyBook</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul class="nav navbar-nav">
+                    <li ng-show="model.isAdmin == false"><a href="#/home">Home</a></li>
+                    <li><a href="#/book-list">Book List<span class="navbar-new"></span></a></li>
+                </ul>
+                <ul ng-if="model.user != undefined" class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#/user/profile"><span class="fui-info-circle"></span>Profile</a>
+                    </li>
+                    <li ng-show="model.isAdmin == true">
+                        <a href="#/admin/user">
+                            <span class="fui-gear"></span>Controll Center</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="model.logout()">
+                            <span class="glyphicon glyphicon-off"></span>Logout
+                        </a>
+                    </li>
+                </ul>
+                <ul ng-if="model.user == undefined" class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="#/login"><span class="fui-arrow-right"></span>Login</a>
+                    </li>
+                    <li>
+                        <a href="#/register"><span class="fui-user">Register</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="wjl-book-list-search-container">
+            <div class="wjl-search-select-container">
+                <select ng-init="selectedType = 'Search By'"
+                        ng-model="selectedType"
+                        class="wjl-select">
+                    <option value="Search By">Search By</option>
+                    <option value="Name">Name</option>
+                    <option value="Author">Author</option>
+                    <option value="ISBN">ISBN</option>
+                </select>
+            </div>
+            <div class="wjl-search-text-container">
+                <div class="input-group">
+                    <input ng-model="searchText" class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                    <span class="input-group-btn">
+                      <a ng-click="model.searchBook(selectedType, searchText)"
+                         class="btn"><span class="fui-search"></span></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <ul class="list-group">
+            <div class="panel-heading panel-success">
+                <div class="row">
+                    <div class="col-sm-2 col-xs-6">
+                        <div class="pull-left">
+                            <strong>Picture</strong>
+                            <a>
+                                <span class="glyphicon glyphicon-triangle-top"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 col-xs-6">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="pull-left">
+                                    <strong>Book Name</strong>
+                                    <a>
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 hidden-xs">
+                                <div class="pull-left">
+                                    <strong>Author</strong>
+                                    <a>
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 hidden-xs">
+                                <div class="pull-left">
+                                    <strong>ISBN</strong>
+                                    <a>
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 hidden-xs">
+                                <div class="pull-right">
+                                    <strong>Availability</strong>
+                                    <a>
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <li ng-repeat="book in model.books"
+                class="list-group-item wjl-hover" >
+                <div class="row">
+                    <div class="col-sm-2 col-xs-6" >
+                        <a ng-click="model.getBookDetails(book._id)">
+                            <img class="wjl-book-list-pic"
+                                 ng-src="{{book.photo}}"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-10 col-xs-6">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="pull-left">
+                                    {{book.name}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3 hidden-xs">
+                                <div class="pull-left">
+                                    {{book.author}}
+                                </div>
+                            </div>
+                            <div class="col-sm-4 hidden-xs">
+                                <div class="pull-left">
+                                    {{book.ISBN}}
+                                </div>
+                            </div>
+                            <div class="col-sm-2 hidden-xs">
+                                <div class="pull-right">
+                                    <div ng-if="book.availability == true">
+                                        <h5 class="fui-check"></h5>
+                                    </div>
+                                    <div ng-if="book.availability == false">
+                                        <h5 class="fui-cross"></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row hidden-xs wjl-book-list-descrp">
+                            <strong>Description:&ensp;</strong>{{book.description}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="divider"></div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="WjlProject">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Wenjun Li Project</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/flat-ui.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" rel="stylesheet"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+    <script src="./js/wjl.js"></script>
+    <script src="./js/flat-ui.js"></script>
+    <!--configurations-->
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!--controllers-->
+    <script src="home/controllers/home.controller.client.js"></script>
+
+    <script src="book/controllers/book-list.controller.client.js"></script>
+    <script src="book/controllers/book-details.controller.client.js"></script>
+    <script src="book/controllers/book-edit.controller.client.js"></script>
+
+    <script src="user/controllers/profile.controller.client.js"></script>
+    <script src="user/controllers/login.controller.client.js"></script>
+    <script src="user/controllers/register.controller.client.js"></script>
+    <script src="user/controllers/view-profile.controller.client.js"></script>
+    <script src="user/controllers/admin.controller.client.js"></script>
+
+
+    <!--services-->
+    <script src="services/userInfo.service.client.js"></script>
+    <script src="services/book.service.client.js"></script>
+    <script src="services/request.service.client.js"></script>
+
+
+</head>
+
+<body>
+    <div ng-view></div>
+</body>
+</html>

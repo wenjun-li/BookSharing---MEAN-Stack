@@ -1,0 +1,40 @@
+{
+  "name": "li-wenjun-webdev",
+  "version": "1.0.0",
+  "description": "Test Node.js Project",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "express-session": "^1.15.2",
+    "fs": "0.0.1-security",
+    "mongoose": "^4.4.15",
+    "aws-sdk": "2.x",
+    "ejs": "2.x",
+    "multer": "^1.3.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Wenjun Li",
+  "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenjun-li-neu/li-wenjun-webdev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wenjun-li-neu/li-wenjun-webdev/issues"
+  },
+  "homepage": "https://github.com/wenjun-li-neu/li-wenjun-webdev#readme"
+}

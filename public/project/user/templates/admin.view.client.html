@@ -1,0 +1,606 @@
+<div class="row demo-row">
+    <div class="row">
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand"><span class="glyphicon glyphicon-cog"></span>&emsp;Controll Center</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/book-list">Book List</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#/user/profile">
+                            <span class="fui-info-circle"></span>Profile
+                        </span></a>
+                    </li>
+                    <li>
+                        <a href="#/admin/user">
+                            <span class="fui-gear"></span>Controll Center<span class="navbar-new">
+                        </span></a>
+                    </li>
+                    <li>
+                        <a ng-click="model.logout()">
+                            <span class="glyphicon glyphicon-off"></span>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav><!-- /navbar -->
+    </div>
+</div> <!-- /row -->
+
+<div class="container-fluid wjl-admin-container">
+    <div class="row">
+        <div class="col-xs-12 bhoechie-tab-container">
+            <div class="col-sm-2 col-xs-3 bhoechie-tab-menu">
+                <div class="list-group">
+                    <a class="list-group-item text-center wjl-vertical-tabs"
+                       ng-class="{'active': model.tabName == 'user'}"
+                       ng-click="model.changeTab('user')">
+                        <h5 class="glyphicon glyphicon-user"></h5><br/>Manage Users
+                    </a>
+
+                    <a class="list-group-item text-center wjl-vertical-tabs"
+                       ng-class="{'active': model.tabName == 'book'}"
+                       ng-click="model.changeTab('book')">
+                        <h5 class="glyphicon glyphicon-book"></h5><br/>Manage Books
+                    </a>
+
+                    <a class="list-group-item text-center wjl-vertical-tabs"
+                       ng-class="{'active': model.tabName == 'request'}"
+                       ng-click="model.changeTab('request')">
+                        <h5 class="glyphicon glyphicon-tasks"></h5><br/>Manage Requests
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-10 col-xs-9 bhoechie-tab">
+                <div ng-show="model.error" class="alert alert-danger">
+                    {{model.error}}
+                </div>
+
+                <div ng-show="model.message" class="alert alert-success">
+                    {{model.message}}
+                </div>
+
+                <!--user tab page-->
+                <div ng-show="model.tabName=='user'"  class="tab-pane" >
+                    <!--user search-->
+                    <div class="row">
+                        <div class="wjl-admin-search-container">
+                            <div class="wjl-search-select-container">
+                                <select ng-init="selectedType = 'Username'"
+                                        ng-model="selectedType"
+                                        class="wjl-select">
+                                    <option value="Username">Username</option>
+                                    <option value="UserId">User Id</option>
+                                </select>
+                            </div>
+                            <div class="wjl-admin-search-text-container">
+                                <div class="input-group">
+                                    <input ng-model="searchText"
+                                           class="form-control"
+                                           type="search"
+                                           placeholder="Search Text">
+                                    <span class="input-group-btn">
+                                      <a ng-click="model.searchUser(selectedType, searchText)"
+                                         class="btn"><span class="fui-search"></span></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <a ng-click="model.showAddUserComponents()"
+                           class="btn btn-primary">
+                            Add User
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <div class="panel">
+                            <ul class="list-group">
+                                <div class="panel-heading panel-success">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="pull-right">
+                                                <strong>Username</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="pull-right">
+                                                <strong>Email</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="pull-right">
+                                                <strong>Type</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div ng-show="model.showAddUserContainer">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-model="model.newUser.username"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-model="model.newUser.email"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="wjl-offset-col-padding">
+                                                <select ng-init="model.newUser.type = 'admin'"
+                                                        ng-model="model.newUser.type"
+                                                        class="wjl-admin-list-select">
+                                                    <option value="admin">Admin</option>
+                                                    <option value="borrower">Borrower</option>
+                                                    <option value="librarian">Lender</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.addUser(model.newUser)">
+                                                <span class="glyphicon glyphicon-plus wjl-admin-add-icon"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.cancelAddUser()">
+                                                <span class="glyphicon glyphicon-remove wjl-admin-add-icon"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--user list-->
+                                <li ng-repeat="user in model.users"
+                                    class="list-group-item wjl-hover" >
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="wjl-offset-col-padding">
+                                                <div ng-show="user.disabled == true">
+                                                    <input ng-disabled="user.disabled"
+                                                           class="form-control wjl-admin-input text-right"
+                                                           type="text"
+                                                           ng-model="user.username"/>
+                                                </div>
+                                                <div ng-show="user.disabled == false">
+                                                    <input ng-disabled="user.disabled"
+                                                           class="form-control wjl-admin-input text-right"
+                                                           type="text"
+                                                           ng-model="user.newUsername"/>
+                                                    <div ng-model="user.username"
+                                                         ng-init="user.username"
+                                                         class="wjl-hidden">{{user.username}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-disabled="user.disabled"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"
+                                                       ng-model="user.email">
+                                                </input>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="wjl-offset-col-padding">
+                                                <select ng-disabled="user.disabled"
+                                                        ng-model="user.type"
+                                                        class="wjl-admin-list-select">
+                                                    <option value="admin">Admin</option>
+                                                    <option value="borrower">Borrower</option>
+                                                    <option value="librarian">Lender</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <div ng-show="user.disabled == true">
+                                                <a ng-click="model.editUser(user)">
+                                                    <span class="glyphicon glyphicon-cog wjl-admin-list-icon"></span>
+                                                </a>
+                                            </div>
+                                            <div ng-show="user.disabled == false">
+                                                <a ng-click="model.updateUser(user)">
+                                                    <span class="glyphicon glyphicon-ok wjl-admin-list-icon"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.deleteUser(user)">
+                                                <span class="glyphicon glyphicon-trash wjl-admin-list-icon"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--book tab page-->
+                <div ng-show="model.tabName=='book'"  class="tab-pane" >
+                    <!--book search-->
+                    <div class="row">
+                        <div class="wjl-admin-search-container">
+                            <div class="wjl-search-select-container">
+                                <select ng-init="selectedType = 'Search By'"
+                                        ng-model="selectedType"
+                                        class="wjl-select">
+                                    <option value="Search By">Search By</option>
+                                    <option value="Name">Name</option>
+                                    <option value="Author">Author</option>
+                                    <option value="ISBN">ISBN</option>
+                                    <option value="OwnerName">Owner</option>
+                                    <option value="BookId">Book Id</option>
+                                </select>
+                            </div>
+                            <div class="wjl-admin-search-text-container">
+                                <div class="input-group">
+                                    <input ng-model="searchText"
+                                           class="form-control"
+                                           type="search"
+                                           placeholder="Search Text">
+                                    <span class="input-group-btn">
+                                      <a ng-click="model.searchBook(selectedType, searchText)"
+                                         class="btn"><span class="fui-search"></span></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <a ng-click="model.showAddBookComponents()"
+                           class="btn btn-primary">
+                            Add Book
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <div class="panel">
+                            <ul class="list-group">
+                                <div class="panel-heading panel-success">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="pull-right">
+                                                <strong>Book ID</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="pull-right">
+                                                <strong>ISBN</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="pull-right">
+                                                <strong>Name</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="pull-right">
+                                                <strong>Author</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div class="pull-right">
+                                                <strong>Owner</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div ng-show="model.showAddBookContainer">
+                                    <div class="row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-2">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-model="model.newBook.ISBN"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-model="model.newBook.name"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-model="model.newBook.author"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <select ng-model="model.newBook.selectedUserName"
+                                                    class="wjl-select wjl-offset-col-padding">
+                                                <option ng-repeat="lender in model.lenders">
+                                                    {{lender.username}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.addBook(model.newBook)">
+                                                <span class="glyphicon glyphicon-plus wjl-admin-add-icon"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.cancelAddBook()">
+                                                <span class="glyphicon glyphicon-remove wjl-admin-add-icon"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--book list-->
+                                <li ng-repeat="book in model.books"
+                                    class="list-group-item wjl-hover" >
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-disabled="true"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"
+                                                       ng-model="book._id">
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-disabled="book.disabled"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"
+                                                       ng-model="book.ISBN">
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-disabled="book.disabled"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"
+                                                       ng-model="book.name">
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-disabled="book.disabled"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"
+                                                       ng-model="book.author">
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div ng-show="book.disabled == false">
+                                                <select ng-disabled="book.disabled"
+                                                        ng-model="book.ownerName"
+                                                        class="wjl-admin-list-select">
+                                                    <option ng-repeat="lender in model.lenders">
+                                                        {{lender.username}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div ng-show="book.disabled == true">
+                                                <div class="wjl-offset-col-padding">
+                                                    <input ng-disabled="book.disabled"
+                                                           class="form-control wjl-admin-input text-right"
+                                                           type="text"
+                                                           ng-model="book.ownerName">
+                                                    </input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div ng-show="book.disabled == true">
+                                                <a ng-click="model.editBook(book)">
+                                                    <span class="glyphicon glyphicon-cog wjl-admin-list-icon"></span>
+                                                </a>
+                                            </div>
+                                            <div ng-show="book.disabled == false">
+                                                <a ng-click="model.updateBook(book)">
+                                                    <span class="glyphicon glyphicon-ok wjl-admin-list-icon"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.deleteBook(book)">
+                                                <span class="glyphicon glyphicon-trash wjl-admin-list-icon"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--request tab page-->
+                <div ng-show="model.tabName=='request'"  class="tab-pane" >
+                    <!--request search-->
+                    <div class="row">
+                        <div class="wjl-admin-search-container">
+                            <div class="wjl-search-select-container">
+                                <select ng-init="selectedType = 'Borrower Name'"
+                                        ng-model="selectedType"
+                                        class="wjl-select">
+                                    <option value="Borrower">Borrower Name</option>
+                                    <option value="BookId">Book Id</option>
+                                </select>
+                            </div>
+                            <div class="wjl-admin-search-request-text-container">
+                                <div class="input-group">
+                                    <input ng-model="searchText"
+                                           class="form-control"
+                                           type="search"
+                                           placeholder="Search Text">
+                                    <span class="input-group-btn">
+                                      <a ng-click="model.searchRequest(selectedType, searchText)"
+                                         class="btn"><span class="fui-search"></span></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <a ng-click="model.showAddRequestComponents()"
+                           class="btn btn-primary">
+                            Add Request
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <div class="panel">
+                            <ul class="list-group">
+                                <div class="panel-heading panel-success">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="pull-right">
+                                                <strong>BookId</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="pull-right">
+                                                <strong>Borrower</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="pull-right">
+                                                <strong>Status</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--add request container-->
+                                <div ng-show="model.showAddRequestContainer">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="wjl-offset-col-padding">
+
+                                            </div>
+                                            <select ng-model="model.newRequest.bookId"
+                                                    class="wjl-select">
+                                                <option ng-repeat="book in model.books">
+                                                    {{book._id}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="wjl-offset-col-padding">
+                                                <select ng-model="model.newRequest.borrowerName"
+                                                        class="wjl-select wjl-offset-col-padding">
+                                                    <option ng-repeat="borrower in model.borrowers">
+                                                        {{borrower.username}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="wjl-offset-col-padding">
+                                                <select ng-init="model.newRequest.state = 'PENDING'"
+                                                        ng-model="model.newRequest.state"
+                                                        class="wjl-select wjl-offset-col-padding">
+                                                    <option value="PENDING">Pending</option>
+                                                    <option value="REJECTED">Rejected</option>
+                                                    <option value="BORROWED">In-use</option>
+                                                    <option value="RETURNED">Finished</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.addRequest(model.newRequest)">
+                                                <span class="glyphicon glyphicon-plus wjl-admin-add-icon"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.cancelAddRequest()">
+                                                <span class="glyphicon glyphicon-remove wjl-admin-add-icon"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--request list-->
+                                <li ng-repeat="request in model.requests"
+                                    class="list-group-item wjl-hover" >
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-disabled="true"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"
+                                                       ng-model="request.bookId"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="wjl-offset-col-padding">
+                                                <input ng-disabled="true"
+                                                       class="form-control wjl-admin-input text-right"
+                                                       type="text"
+                                                       ng-model="request.borrowerName"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="wjl-offset-col-padding">
+                                                <select ng-disabled="request.disabled"
+                                                        ng-model="request.state"
+                                                        class="wjl-admin-list-select">
+                                                    <option value="PENDING">Pending</option>
+                                                    <option value="REJECTED">Rejected</option>
+                                                    <option value="BORROWED">In-use</option>
+                                                    <option value="RETURNED">Finished</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div ng-show="request.disabled == true">
+                                                <a ng-click="model.editRequest(request)">
+                                                    <span class="glyphicon glyphicon-cog wjl-admin-list-icon"></span>
+                                                </a>
+                                            </div>
+                                            <div ng-show="request.disabled == false">
+                                                <a ng-click="model.updateRequest(request)">
+                                                    <span class="glyphicon glyphicon-ok wjl-admin-list-icon"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <a ng-click="model.deleteRequest(request)">
+                                                <span class="glyphicon glyphicon-trash wjl-admin-list-icon"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

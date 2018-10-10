@@ -1,0 +1,54 @@
+<nav class="navbar navbar-light-grey navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+        <div class="navbar-text pull-right">
+            <a ng-click="model.editWidget(model.widget)">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand"
+               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
+                Edit Youtube Widget
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <label for="url-widget-youtube">URL</label>
+    <input ng-model="model.widget.url"
+            id="url-widget-youtube"
+           type="text"
+           class="form-control"
+           value="Wireframe"/>
+
+    <label for="width-widget-youtube">Width</label>
+    <input ng-model="model.widget.width"
+           id="width-widget-youtube"
+           type="text"
+           class="form-control"
+           value="Wireframe"/>
+
+    <label for="delete-widget-youtube"></label>
+    <a id="delete-widget-youtube"
+       ng-click="model.deleteWidget()"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+</div>
+
+<nav class="navbar navbar-light-grey navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}/">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

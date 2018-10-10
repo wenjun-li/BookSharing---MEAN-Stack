@@ -1,0 +1,57 @@
+<nav class="navbar navbar-light-grey navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+        <div class="navbar-text pull-right">
+            <a ng-click="model.editWidget(model.widget)">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">Edit Heading Widget</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <label for="text-widget-heading">Text</label>
+    <input ng-model="model.widget.text"
+           id="text-widget-heading"
+           type="text"
+           class="form-control"
+           value="Wireframe"/>
+
+    <label for="size-widget-heading">Size</label>
+    <select ng-model="model.widget.size"
+            id="size-widget-heading"
+            class="form-control">
+        <option selected="selected">{{model.widget.size}}</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+
+    <label for="delete-widget-heading"></label>
+    <a id="delete-widget-heading"
+       ng-click="model.deleteWidget()"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+</div>
+
+<nav class="navbar navbar-light-grey navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}/">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
